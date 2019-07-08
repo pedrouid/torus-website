@@ -1,10 +1,51 @@
 <template>
   <div>
     <v-layout mt-5 wrap row>
-      <div class="text-black font-weight-bold headline px-3 mb-3">Transaction Activities</div>
-      <v-flex xs12 mb-3> </v-flex>
+      <v-flex xs12 mb-3 px-3>
+        <div class="text-black font-weight-bold headline left">Transaction Activities</div>
+        <div class="font-weight-bold right">
+          <v-select
+            class="pt-0 mt-0 ml-2 subtitle-2"
+            height="25px"
+            hide-details
+            :value="'All Transaction'"
+            :items="['All Transaction', 'Send', 'Receive']"
+          ></v-select>
+          <v-select class="pt-0 mt-0 ml-2 subtitle-2" height="25px" hide-details :value="'Period'" :items="['Period', 'Yead', 'Month']"></v-select>
+        </div>
+      </v-flex>
+
+      <v-flex xs12 mb-3 px-3>
+        <v-layout row class="caption">
+          <v-flex xs12 sm2 py-3 px-4>Transaction</v-flex>
+          <v-flex xs12 sm2 py-3 px-4>Date</v-flex>
+          <v-flex xs12 sm2 py-3 px-4 class="text-xs-center">Amount</v-flex>
+          <v-flex xs12 sm4 py-3 px-4>To</v-flex>
+          <v-flex xs12 sm2 py-3 px-4 class="text-xs-center">Status</v-flex>
+        </v-layout>
+
+        <!-- List of activities -->
+        <v-layout row class="activity-list body-2" v-for="n in 3" :key="n">
+          <v-flex xs12 sm2 py-3 px-4>
+            <v-icon>mdi-arrow-right-circle-outline</v-icon>
+            Sent
+          </v-flex>
+          <v-flex xs12 sm2 py-3 px-4>
+            10 Jun
+          </v-flex>
+          <v-flex xs12 sm2 py-3 px-4 class="text-xs-center">
+            4.00000 ETH
+          </v-flex>
+          <v-flex xs12 sm4 py-3 px-4>
+            0xdbb59a63bf5d4d0c32a20dc33e04008a71aa8b6e
+          </v-flex>
+          <v-flex xs12 sm2 py-3 px-4 class="text-xs-center">
+            Pending
+          </v-flex>
+        </v-layout>
+      </v-flex>
     </v-layout>
-    <v-layout mt-5 row wrap align-start justify-center align-content-start>
+    <v-layout mt-5 row wrap align-start justify-center align-content-start v-if="false">
       <v-flex xs12 sm5>
         <span>
           <span class="spanWrapSvgStyle">
@@ -164,5 +205,10 @@ export default {
 
 ::v-deep .v-text-field.v-text-field--solo .v-input__control {
   min-height: auto !important;
+}
+
+.activity-list {
+  border-radius: 3px;
+  box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.06);
 }
 </style>
