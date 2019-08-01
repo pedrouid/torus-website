@@ -145,7 +145,7 @@ export default {
       amount: 0,
       displayAmount: '',
       convertedAmount: '',
-      toAddress: 'sinlin@tor.us',
+      toAddress: '',
       formValid: false,
       toggle_exclusive: 0,
       gas: 21000,
