@@ -27,6 +27,15 @@
     box-shadow: none !important;
   }
 
+  ::v-deep .activity-pagination {
+    li {
+      border-right: 1px solid #B2BAC4;
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
   ::v-deep .v-pagination__item, ::v-deep .v-pagination__navigation {
     border: 0;
     background: none;
@@ -34,6 +43,8 @@
     font-weight: 500;
     box-shadow: none;
     opacity: 0.7;
+    margin: 0 5px;
+    height: 1.5rem;
     &.primary {
       background: none;
       background-color: transparent !important;

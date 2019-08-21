@@ -90,7 +90,7 @@ export default {
     return {
       page: 1,
       pageCount: 0,
-      itemsPerPage: 8,
+      itemsPerPage: 2,
       expanded: [],
       pagination: {},
       defaultSort: 'date',
