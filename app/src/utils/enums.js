@@ -6,6 +6,7 @@ const LOCALHOST = 'localhost'
 const GOERLI = 'goerli'
 const RPC = 'rpc'
 const MATIC = 'matic'
+const SKALE = 'skale'
 
 const MAINNET_CODE = 1
 const ROPSTEN_CODE = 3
@@ -13,6 +14,7 @@ const RINKEYBY_CODE = 4
 const KOVAN_CODE = 42
 const GOERLI_CODE = 5
 const MATIC_CODE = 1
+const SKALE_CODE = 1
 
 const ROPSTEN_DISPLAY_NAME = 'Ropsten Test Network'
 const RINKEBY_DISPLAY_NAME = 'Rinkeby Test Network'
@@ -22,8 +24,10 @@ const GOERLI_DISPLAY_NAME = 'Goerli Test Network'
 const RPC_DISPLAY_NAME = 'RPC'
 const LOCALHOST_DISPLAY_NAME = 'localhost:8545'
 const MATIC_DISPLAY_NAME = 'Matic Alpha-Mainnet'
+const SKALE_DISPLAY_NAME = 'Skale Side Chain'
 
 const MATIC_URL = 'https://alpha.ethereum.matic.network'
+const SKALE_URL = 'https://157.230.171.237.xip.io:8117'
 
 const TRANSACTION_TYPE_CANCEL = 'cancel'
 const TRANSACTION_TYPE_RETRY = 'retry'
@@ -82,5 +86,9 @@ module.exports = {
   MATIC,
   MATIC_CODE,
   ACTIVE,
-  INACTIVE
+  INACTIVE,
+  SKALE_URL,
+  SKALE_DISPLAY_NAME,
+  SKALE_CODE,
+  SKALE
 }

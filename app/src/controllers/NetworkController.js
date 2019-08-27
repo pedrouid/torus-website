@@ -26,7 +26,7 @@ const { createSwappableProxy, createEventEmitterProxy } = require('swappable-obj
 const defaultProviderConfig = { type: 'mainnet' }
 const defaultNetworkConfig = { ticker: 'ETH' }
 const networks = { networkList: {} }
-const { ROPSTEN, RINKEBY, KOVAN, MAINNET, LOCALHOST, GOERLI, MATIC, MATIC_URL, MATIC_CODE } = require('../utils/enums')
+const { ROPSTEN, RINKEBY, KOVAN, MAINNET, LOCALHOST, GOERLI, MATIC, MATIC_URL, MATIC_CODE, SKALE, SKALE_URL, SKALE_CODE } = require('../utils/enums')
 const INFURA_PROVIDER_TYPES = [ROPSTEN, RINKEBY, KOVAN, MAINNET, GOERLI]
 
 export default class NetworkController extends EventEmitter {
@@ -206,6 +206,8 @@ export default class NetworkController extends EventEmitter {
       // url-based rpc endpoints
     } else if (type === MATIC) {
       this._configureStandardProvider({ rpcUrl: MATIC_URL, MATIC_CODE, MATIC, MATIC })
+    } else if (type === SKALE) {
+      this._configureStandardProvider({ rpcUrl: SKALE_URL, SKALE_CODE, SKALE, SKALE })
     } else if (type === 'rpc') {
       this._configureStandardProvider({ rpcUrl: rpcTarget, chainId, ticker, nickname })
     } else {

@@ -155,6 +155,7 @@ const {
   GOERLI,
   RPC,
   MATIC,
+  SKALE,
   ROPSTEN_DISPLAY_NAME,
   RINKEBY_DISPLAY_NAME,
   KOVAN_DISPLAY_NAME,
@@ -162,7 +163,8 @@ const {
   LOCALHOST_DISPLAY_NAME,
   GOERLI_DISPLAY_NAME,
   RPC_DISPLAY_NAME,
-  MATIC_DISPLAY_NAME
+  MATIC_DISPLAY_NAME,
+  SKALE_DISPLAY_NAME
 } = require('../../utils/enums')
 
 export default {
@@ -208,6 +210,10 @@ export default {
         {
           name: MATIC_DISPLAY_NAME,
           value: MATIC
+        },
+        {
+          name: SKALE_DISPLAY_NAME,
+          value: SKALE
         }
       ],
       rpc: { chainId: '', networkName: '', networkUrl: '' },
