@@ -27,7 +27,7 @@ const MATIC_DISPLAY_NAME = 'Matic Alpha-Mainnet'
 const SKALE_DISPLAY_NAME = 'Skale Side Chain'
 
 const MATIC_URL = 'https://alpha.ethereum.matic.network'
-const SKALE_URL = 'https://157.230.171.237.xip.io:8117'
+const SKALE_URL = 'https://ethboston1.skalenodes.com:10062'
 
 const TRANSACTION_TYPE_CANCEL = 'cancel'
 const TRANSACTION_TYPE_RETRY = 'retry'
