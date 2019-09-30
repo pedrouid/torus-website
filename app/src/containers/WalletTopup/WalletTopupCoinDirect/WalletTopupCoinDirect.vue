@@ -18,8 +18,8 @@ export default {
       url: '',
       loaded: false,
       currencyCode: 'eth',
-      path: coindirectTestHost,
-      merchantId: coindirectTestMerchantID,
+      path: coindirectLiveHost,
+      merchantId: coindirectLiveMerchantID,
       // Modify before deploying.
       redirectURL: ''
     }
@@ -38,10 +38,7 @@ export default {
       '&address=' +
       this.$store.state.selectedAddress +
       '&url=' +
-      encodeURIComponent(redirectURL) +
-      '&colorCode=' +
-      encodeURIComponent(this.$vuetify.theme.themes.light.primary)
-
+      encodeURIComponent(redirectURL)
     this.loaded = true
     // log.info('this is', this)
   }
