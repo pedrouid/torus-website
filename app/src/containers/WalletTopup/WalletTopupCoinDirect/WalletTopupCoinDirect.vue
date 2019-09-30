@@ -10,7 +10,7 @@
 
 <script>
 import config from '../../../config'
-const { coindirectTestHost, coindirectLiveHost, coindirectTestMerchantID, coindirectLiveMerchantID } = config
+const { coindirectTestHost, coindirectLiveHost, coindirectTestMerchantID, coindirectLiveMerchantID, coindirectTestURL, coindirectLiveURL } = config
 
 export default {
   data() {
@@ -18,15 +18,13 @@ export default {
       url: '',
       loaded: false,
       currencyCode: 'eth',
-      path: coindirectLiveHost,
-      merchantId: coindirectLiveMerchantID,
       // Modify before deploying.
-      redirectURL: ''
+      path: coindirectTestHost,
+      merchantId: coindirectTestMerchantID,
+      redirectURL: coindirectTestURL
     }
   },
   mounted() {
-    // let redirectURL = window.location.origin + '/wallet/history'
-    let redirectURL = 'http://coindirect-api.tor.us/transaction'
     this.url =
       this.path +
       '&email=' +
@@ -38,9 +36,8 @@ export default {
       '&address=' +
       this.$store.state.selectedAddress +
       '&url=' +
-      encodeURIComponent(redirectURL)
+      encodeURIComponent(this.redirectURL)
     this.loaded = true
-    // log.info('this is', this)
   }
 }
 </script>
