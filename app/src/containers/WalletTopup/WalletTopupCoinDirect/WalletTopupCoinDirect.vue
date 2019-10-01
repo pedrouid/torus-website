@@ -19,9 +19,9 @@ export default {
       loaded: false,
       currencyCode: 'eth',
       // Modify before deploying.
-      path: coindirectTestHost,
-      merchantId: coindirectTestMerchantID,
-      redirectURL: coindirectTestURL
+      path: coindirectLiveHost,
+      merchantId: coindirectLiveMerchantID,
+      redirectURL: coindirectLiveURL
     }
   },
   mounted() {
