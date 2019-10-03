@@ -2,11 +2,12 @@ import config from '../config'
 import { post, get } from '../utils/httpHelpers'
 import log from 'loglevel'
 
-const postQuote = reqObj => {
+const postQuote = (reqObj, token) => {
   try {
     const options = {
       mode: 'cors',
       headers: {
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
@@ -16,11 +17,12 @@ const postQuote = reqObj => {
     log.error(e)
   }
 }
-const postOrder = reqObj => {
+const postOrder = (reqObj, token) => {
   try {
     const options = {
       mode: 'cors',
       headers: {
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
@@ -31,24 +33,25 @@ const postOrder = reqObj => {
   }
 }
 
-const getPastOrders = (reqObj, params = {}) => {
+const getPastOrders = (reqObj, params = {}, token) => {
   try {
     const options = {
       mode: 'cors',
       headers: {
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
     }
     const url = new URL(`${config.simplexHost}/pastorders`)
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    return get(url, reqObj, options)
+    return get(url, options)
   } catch (e) {
     log.error(e)
   }
 }
 
-const getStatus = userId => {
+const getStatus = (userId, token) => {
   try {
     return get(`${config.simplexHost}/status/${userId}`)
   } catch (e) {

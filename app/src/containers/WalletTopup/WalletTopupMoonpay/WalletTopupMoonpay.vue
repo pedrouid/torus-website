@@ -12,7 +12,7 @@
 
 <script>
 import config from '../../../config'
-const { moonpayLiveAPIKEY, moonpayHost } = config
+const { moonpayTestAPIKEY, moonpayTestHost } = config
 
 export default {
   data() {
@@ -20,8 +20,8 @@ export default {
       url: '',
       loaded: false,
       currencyCode: 'eth',
-      path: moonpayHost,
-      apiKey: moonpayLiveAPIKEY,
+      path: moonpayTestHost,
+      apiKey: moonpayTestAPIKEY,
       // Modify before deploying.
       redirectURL: ''
     }

@@ -80,9 +80,7 @@
         <v-tooltip bottom :disabled="formValid">
           <template v-slot:activator="{ on }">
             <span v-on="on">
-              <v-btn :disabled="!formValid" depressed color="primary" type="submit" @click.prevent="sendOrder">
-                Continue
-              </v-btn>
+              <v-btn :disabled="!formValid" depressed color="primary" type="submit" @click.prevent="sendOrder">Continue</v-btn>
             </span>
           </template>
           <span>Resolve the errors</span>
@@ -140,12 +138,15 @@ export default {
       if (parseFloat(newValue) <= 20000 && parseFloat(newValue) >= 50) this.fetchQuote()
     },
     fetchQuote: throttle(async function() {
-      postQuote({
-        digital_currency: 'ETH',
-        fiat_currency: this.selectedCurrency,
-        requested_currency: this.selectedCurrency,
-        requested_amount: +parseFloat(this.fiatValue)
-      })
+      postQuote(
+        {
+          digital_currency: 'ETH',
+          fiat_currency: this.selectedCurrency,
+          requested_currency: this.selectedCurrency,
+          requested_amount: +parseFloat(this.fiatValue)
+        },
+        this.$store.state.jwtToken
+      )
         .then(result => {
           this.ethValue = result.result.digital_money.amount
           this.currencyRate = result.result.digital_money.amount / result.result.fiat_money.total_amount
@@ -172,28 +173,31 @@ export default {
     },
     sendOrder() {
       if (this.$refs.inputForm.validate()) {
-        postOrder({
-          'g-recaptcha-response': '',
-          account_details: {
-            app_end_user_id: this.currentOrder.user_id
-          },
-          transaction_details: {
-            payment_details: {
-              fiat_total_amount: {
-                currency: this.currentOrder.fiat_money.currency,
-                amount: this.currentOrder.fiat_money.total_amount
-              },
-              requested_digital_amount: {
-                currency: this.currentOrder.digital_money.currency,
-                amount: this.currentOrder.digital_money.amount
-              },
-              destination_wallet: {
-                currency: this.currentOrder.digital_money.currency,
-                address: this.$store.state.selectedAddress
+        postOrder(
+          {
+            'g-recaptcha-response': '',
+            account_details: {
+              app_end_user_id: this.currentOrder.user_id
+            },
+            transaction_details: {
+              payment_details: {
+                fiat_total_amount: {
+                  currency: this.currentOrder.fiat_money.currency,
+                  amount: this.currentOrder.fiat_money.total_amount
+                },
+                requested_digital_amount: {
+                  currency: this.currentOrder.digital_money.currency,
+                  amount: this.currentOrder.digital_money.amount
+                },
+                destination_wallet: {
+                  currency: this.currentOrder.digital_money.currency,
+                  address: this.$store.state.selectedAddress
+                }
               }
             }
-          }
-        }).then(result => {
+          },
+          this.$store.state.jwtToken
+        ).then(result => {
           const {
             version,
             partner,
