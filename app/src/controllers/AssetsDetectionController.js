@@ -159,7 +159,7 @@ export default class AssetsDetectionController {
     }
     var { ignoredCollectibles, collectibles: collectiblesToRemove } = this.assetController.store.getState()
     this.assetController.store.updateState({ selectedAddress: selectedAddress })
-    // log.info('AssetDetectionController: detectCollectibles: State of AssetController', this.assetController.store.getState())
+    log.info('AssetDetectionController: detectCollectibles: State of AssetController', this.assetController.store.getState())
     const apiCollectibles = await this.getOwnerCollectibles()
     const addCollectiblesPromises = apiCollectibles.map(async collectible => {
       const {
