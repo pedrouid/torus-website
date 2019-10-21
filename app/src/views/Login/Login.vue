@@ -84,6 +84,19 @@
                       <img width="24" :src="require('../../../public/img/icons/discord.svg')" />
                     </v-btn>
                   </v-flex>
+                  <v-flex xs3 px-1>
+                    <v-btn
+                      :large="!$vuetify.breakpoint.xsOnly"
+                      outlined
+                      block
+                      class="other-login-btn"
+                      type="button"
+                      title="Login with Cognito"
+                      @click="triggerLogin({ verifier: COGNITO, calledFromEmbed: false })"
+                    >
+                      <img width="24" :src="require('../../../public/img/icons/discord.svg')" />
+                    </v-btn>
+                  </v-flex>
                 </v-layout>
               </v-flex>
               <v-flex class="caption" mb-6 xs9 sm7 ml-auto mr-auto>
@@ -148,7 +161,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import PageLoader from '../../components/helpers/PageLoader'
-import { GOOGLE, FACEBOOK, REDDIT, TWITCH, DISCORD } from '../../utils/enums'
+import { GOOGLE, FACEBOOK, REDDIT, TWITCH, DISCORD, COGNITO } from '../../utils/enums'
 import config from '../../config'
 
 export default {
@@ -163,7 +176,8 @@ export default {
       GOOGLE: GOOGLE,
       TWITCH: TWITCH,
       REDDIT: REDDIT,
-      DISCORD: DISCORD
+      DISCORD: DISCORD,
+      COGNITO: COGNITO
     }
   },
   methods: {

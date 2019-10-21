@@ -88,6 +88,7 @@ const FACEBOOK = 'facebook'
 const REDDIT = 'reddit'
 const DISCORD = 'discord'
 const TWITCH = 'twitch'
+const COGNITO = 'cognito'
 const ETH_LABEL = 'ETH Address'
 const GOOGLE_LABEL = 'Google Email'
 const FACEBOOK_LABEL = 'Facebook ID'
@@ -158,6 +159,7 @@ module.exports = {
   TWITCH,
   REDDIT,
   DISCORD,
+  COGNITO,
   ETH_LABEL,
   GOOGLE_LABEL,
   FACEBOOK_LABEL,

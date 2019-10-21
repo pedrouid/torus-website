@@ -11,6 +11,7 @@ import {
   GOOGLE,
   TWITCH,
   REDDIT,
+  COGNITO,
   DISCORD,
   THEME_LIGHT_BLUE_NAME
 } from '../utils/enums'
@@ -39,6 +40,8 @@ var redditWindow
 var iClosedReddit = false
 var discordWindow
 var iClosedDiscord = false
+var cognitoWindow
+var iClosedCognito = false
 
 export default {
   logOut({ commit, dispatch }, payload) {
@@ -486,6 +489,72 @@ export default {
           }
           iClosedReddit = false
           redditWindow = undefined
+        }
+      }, 1000)
+    } else if (verifier === COGNITO) {
+      const state = encodeURIComponent(
+        window.btoa(
+          JSON.stringify({
+            instanceId: torus.instanceId,
+            verifier: COGNITO
+          })
+        )
+      )
+      const bc = new BroadcastChannel(`redirect_channel_${torus.instanceId}`, broadcastChannelOptions)
+      bc.onmessage = async ev => {
+        if (ev.error && ev.error !== '') {
+          log.error(ev.error)
+          oauthStream.write({ err: ev.error })
+        } else if (ev.data && ev.data.verifier === COGNITO) {
+          try {
+            log.info(ev.data)
+            const { access_token: accessToken } = ev.data.verifierParams
+            const userInfo = await get('https://oauth.reddit.com/api/v1/me', {
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
+            })
+            const { id, icon_img: profileImage, name } = userInfo || {}
+            dispatch('updateIdToken', { idToken: accessToken })
+            dispatch('updateUserInfo', {
+              userInfo: {
+                profileImage: profileImage.split('?').length > 0 ? profileImage.split('?')[0] : profileImage,
+                name,
+                email: '',
+                verifierId: name.toString().toLowerCase(),
+                verifier: COGNITO,
+                verifierParams: { verifier_id: name.toString().toLowerCase() }
+              }
+            })
+            dispatch('handleLogin', { calledFromEmbed, endPointNumber })
+          } catch (error) {
+            log.error(error)
+            oauthStream.write({ err: 'User cancelled login or something went wrong.' })
+          } finally {
+            bc.close()
+            iClosedCognito = true
+            cognitoWindow.close()
+          }
+        }
+      }
+      const scope = encodeURIComponent('openid profile')
+      log.info(config.redirect_uri)
+      cognitoWindow = window.open(
+        `https://kalhatti2.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=${config.COGNITO_CLIENT_ID}&redirect_uri=${
+          config.redirect_uri
+        }'&state=${state}`,
+        '_blank',
+        'directories=0,titlebar=0,toolbar=0,status=0,location=0,menubar=0,height=450,width=600'
+      )
+      var cognitoTimer = setInterval(function() {
+        if (cognitoWindow.closed) {
+          clearInterval(cognitoTimer)
+          if (!iClosedCognito) {
+            log.error('user closed popup')
+            oauthStream.write({ err: 'user closed popup' })
+          }
+          iClosedCognito = false
+          cognitoWindow = undefined
         }
       }, 1000)
     } else if (verifier === DISCORD) {
