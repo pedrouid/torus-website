@@ -91,10 +91,10 @@ describe('Tests Wallet Transfer Transaction', () => {
 
   it('Should error on invalid input', async () => {
     await selectItem(page, '#recipient-verifier', '.recipient-verifier-container', GOOGLE_LABEL)
-    await typeText(page, 'lionell', '#recipient-address')
+    await typeText(page, 'lionell', '#recipient')
     await waitForClass(page, '.recipient-address', 'error--text')
 
-    await typeText(page, '@tor.us', '#recipient-address')
+    await typeText(page, '@tor.us', '#recipient')
   })
 
   it('Should error on invalid you send input', async () => {
